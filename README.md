@@ -43,6 +43,11 @@ Construcción de un pipeline moderno que:
 
 ---
 
+## 🛠️ WORKFLOW
+
+![workflow](https://github.com/larosatoro96/CICDMOVIESPROJECT/raw/construccion/workflow.png)
+---
+
 ## 🔄 Flujo ETL (Medallion)
 
 | Capa | Descripción | Resultado |
@@ -50,8 +55,6 @@ Construcción de un pipeline moderno que:
 | **Bronze** | Ingesta directa desde CSV | Datos sin transformación |
 | **Silver** | Limpieza, cast, joins, estandarización | Datos limpios |
 | **Gold** | Modelo final para análisis | Dataset consumido en Power BI |
-
-![workflow](https://github.com/larosatoro96/CICDMOVIESPROJECT/raw/construccion/workflow.png)
 
 **Archivos consumidos del RAW:**
 - movies.csv
