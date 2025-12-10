@@ -244,12 +244,10 @@ jobs:
               "timeout_seconds": 3600,
               "max_retries": 2,
               "depends_on": [
-                {
-                  "task_key": "Ingest_Details",
-                  "task_key": "Ingest_More_Info",
-                  "task_key": "Ingest_Movies",
-                  "task_key": "Ingest_Poster"
-                }
+                {"task_key": "Ingest_Details"},
+                {"task_key": "Ingest_More_Info"},
+                {"task_key": "Ingest_Movies"},
+                {"task_key": "Ingest_Poster"}
               ]
             },
             {
@@ -295,18 +293,16 @@ jobs:
               "timeout_seconds": 3600,
               "max_retries": 2,
               "depends_on": [
-                {
-                  "task_key": "Ingest_Poster",
-                  "task_key": "Load",
-                  "task_key": "Ingest_Movies",
-                  "task_key": "Preparacion_Ambiente",
-                  "task_key": "Transform",
-                  "task_key": "Ingest_More_Info",
-                  "task_key": "Grants_Medallion",
-                  "task_key": "DDL_Medallion",
-                  "task_key": "Drop_Medallion",
-                  "task_key": "Ingest_Details"
-                }
+                {"task_key": "Ingest_Poster"},
+                {"task_key": "Load"},
+                {"task_key": "Ingest_Movies"},
+                {"task_key": "Preparacion_Ambiente"},
+                {"task_key": "Transform"},
+                {"task_key": "Ingest_More_Info"},
+                {"task_key": "Grants_Medallion"},
+                {"task_key": "DDL_Medallion"},
+                {"task_key": "Drop_Medallion"},
+                {"task_key": "Ingest_Details"}
               ],
               "run_if": "AT_LEAST_ONE_FAILED"
             }
