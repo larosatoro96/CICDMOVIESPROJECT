@@ -51,6 +51,8 @@ Construcción de un pipeline moderno que:
 | **Silver** | Limpieza, cast, joins, estandarización | Datos limpios |
 | **Gold** | Modelo final para análisis | Dataset consumido en Power BI |
 
+![workflow](https://github.com/larosatoro96/CICDMOVIESPROJECT/raw/construccion/workflow.png)
+
 **Archivos consumidos del RAW:**
 - movies.csv
 - poster.csv
