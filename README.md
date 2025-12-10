@@ -1,89 +1,95 @@
-# CICDMOVIESPROJECT
-🎬 ETL Pipeline de Películas con Azure Databricks (Arquitectura Medallion + CI/CD)
+# 🎬 ETL Pipeline de Películas con Azure Databricks (Arquitectura Medallion + CI/CD)
 
-Este proyecto implementa un Pipeline ETL de análisis de películas, utilizando la arquitectura Medallion (Bronze → Silver → Gold) en Azure Databricks, con integración a múltiples servicios en Azure, gobernanza de datos, y despliegue automatizado mediante CI/CD con GitHub Actions.
+Este proyecto implementa un **Pipeline ETL de análisis de películas**, utilizando la **arquitectura Medallion (Bronze → Silver → Gold)** en **Azure Databricks**, con integración a múltiples servicios en Azure, gobernanza de datos, y despliegue automatizado mediante **CI/CD con GitHub Actions**.
 
-📌 Dataset utilizado:
-Which Movie Should I Watch Today?
+📌 Dataset utilizado:  
+**Which Movie Should I Watch Today?**  
 Fuente: Kaggle → https://www.kaggle.com/datasets/hassanelfattmi/which-movie-should-i-watch-today
 
-🚀 Objetivo del Proyecto
+---
 
-Construir un pipeline de datos moderno, el cual:
+## 🚀 Objetivo del Proyecto
 
-✔ Consuma datos desde Azure Data Lake (CSV)
-✔ Transforme y limpie información de películas
-✔ Publique datos curados en la capa Gold
-✔ Aplique seguridad con roles, grants y Delta Sharing
-✔ Habilite un dashboard en Power BI
+Construir un **pipeline de datos moderno**, el cual:
+
+✔ Consuma datos desde Azure Data Lake (CSV)  
+✔ Transforme y limpie información de películas  
+✔ Publique datos curados en la capa Gold  
+✔ Aplique seguridad con roles, grants y Delta Sharing  
+✔ Habilite un dashboard en Power BI  
 ✔ Automatice deployment de notebooks y workflows con CI/CD
 
-🏗 Arquitectura Tecnológica
+---
+
+## 🏗 Arquitectura Tecnológica
 
 Este proyecto integra los siguientes servicios de Azure:
 
-🔹 Azure Databricks (ETL + Medallion Architecture
-🔹 Azure Data Lake Storage Gen2 (Datalake)
-🔹 Azure Key Vault (Gestión de secretos)
-🔹 Azure Entra ID (Autenticación de servicios)
-🔹 Access Connector for DataBricks (Security Global Access)
-🔹 GitHub Actions (CI/CD para Workflows Databricks)
-🔹 Power BI Desktop (Visualización final)
-🔹 Delta Sharing (Compartición segura de la capa Gold)
+🔹 **Azure Databricks** (ETL + Medallion Architecture)  
+🔹 **Azure Data Lake Storage Gen2** (Datalake)  
+🔹 **Azure Key Vault** (Gestión de secretos)  
+🔹 **Azure Entra ID** (Autenticación de servicios)  
+🔹 **Access Connector for DataBricks** (Security Global Access)  
+🔹 **GitHub Actions** (CI/CD para Workflows Databricks)  
+🔹 **Power BI Desktop** (Visualización final)  
+🔹 **Delta Sharing** (Compartición segura de la capa Gold)
 
-⚙️ Se estableció el acceso utilizando:
+⚙️ Se estableció el acceso utilizando:  
+- External Locations  
+- Credential Registrations  
+- Key Vault Secrets  
+- Permisos RBAC y SQL Grants
 
-External Locations
+---
 
-Credential Registrations
+## 🔄 Flujo ETL (Arquitectura Medallion)
 
-Key Vault Secrets
+| Capa | Descripción | Resultado |
+|------|-------------|-----------|
+| 🟫 **Bronze** | Ingesta cruda desde CSV del Data Lake RAW | Tablas sin transformación |
+| 🥈 **Silver** | Limpieza, cast de tipos, join, normalización | Datos listos para consumo analítico |
+| 🥇 **Gold** | Modelo final optimizado para análisis | Dataset consumido por Power BI y Delta Sharing |
 
-Permisos RBAC y SQL Grants
+📌 Archivos consumidos:  
+- `movies.csv`  
+- `poster.csv`  
+- `movie_details.csv`  
+- `more_info.csv`
 
-🔄 Flujo ETL (Arquitectura Medallion)
-Capa	Descripción	Resultado
-🟫 Bronze	Ingesta cruda desde CSV del Data Lake RAW	Tablas sin transformación
-🥈 Silver	Limpieza, cast de tipos, join, normalización	Datos listos para consumo analítico
-🥇 Gold	Modelo final optimizado para análisis	Dataset consumido por Power BI y Delta Sharing
+---
 
-📌 Archivos consumidos:
-
-movies.csv
-
-poster.csv
-
-movie_details.csv
-
-more_info.csv
-
-🔐 Seguridad y Gobernanza
+## 🔐 Seguridad y Gobernanza
 
 🔒 Implementación de permisos avanzados:
 
-Recurso	Control
-Catálogos, esquemas y tablas	Grants basados en roles
-Secretos	Azure Key Vault
-External Locations	Storage + Access Connector
-Compartición de datos	Delta Sharing
-🔁 CI/CD – Despliegue Automático
+| Recurso | Control |
+|--------|--------|
+| Catálogos, esquemas y tablas | Grants basados en roles |
+| Secretos | Azure Key Vault |
+| External Locations | Storage + Access Connector |
+| Compartición de datos | Delta Sharing |
 
-En la carpeta .github/workflows se encuentra el workflow que:
+---
 
-✔ Recrea Workflows de Databricks en PROD
-✔ Versiona notebooks y scripts en repos
-✔ Ejecuta el pipeline completo de forma automatizada
+## 🔁 CI/CD – Despliegue Automático
+
+En la carpeta `.github/workflows` se encuentra el workflow que:
+
+✔ Recrea Workflows de Databricks en PROD  
+✔ Versiona notebooks y scripts en repos  
+✔ Ejecuta el pipeline completo de forma automatizada  
 ✔ Realiza rollback si ocurre un error
 
-🧾 El YAML permite:
+🧾 **El YAML permite:**
+- Definir Jobs  
+- Declarar dependencias  
+- Aplicar despliegue controlado por ambiente  
 
-Definir Jobs
+---
 
-Declarar dependencias
+## 📂 Estructura del Repositorio
 
-Aplicar despliegue controlado por ambiente
-
-📂 Estructura del Repositorio
+```
 📦 ETL-Peliculas
 │
 ├── 📊 Dashboard/                     → Reporte Power BI (.pbix)
@@ -94,45 +100,46 @@ Aplicar despliegue controlado por ambiente
 ├── 🔄 Proceso/                       → ETL en notebooks (Bronze/Silver/Gold)
 ├── 🏅 Certificaciones/               → Evidencias del curso / certificaciones
 └── README.md
+```
 
-📊 Dashboard Power BI
+---
 
-El archivo .pbix muestra:
+## 📊 Dashboard Power BI
 
-🎞 Recomendación de películas
-📈 Distribución por género
-⭐ Promedio de puntuaciones
-🎭 Popularidad y ratings
-📌 Datos provenientes de la capa Gold en Delta
+El archivo `.pbix` muestra:
 
-💻 Tecnologías Utilizadas
-Área	Tecnología
-ETL	PySpark + Databricks
-Almacenamiento	ADLS Gen2
-Seguridad	Key Vault + Entra ID + AC Databricks
-DataOps	GitHub Actions
-Visualización	Power BI
-Sharing	Delta Sharing
+🎞 Recomendación de películas  
+📈 Distribución por género  
+⭐ Promedio de puntuaciones  
+🎭 Popularidad y ratings  
+📌 Datos provenientes de la **capa Gold en Delta**
 
-🙌 Autor
+---
 
-👨‍💻 Andrés Gustavo La Rosa Toro Cabrera
-📌 Ingeniero de Datos
+## 💻 Tecnologías Utilizadas
 
-🔗 LinkedIn: https://www.linkedin.com/in/glarosatoroc/
+| Área | Tecnología |
+|------|------------|
+| ETL | PySpark + Databricks |
+| Almacenamiento | ADLS Gen2 |
+| Seguridad | Key Vault + Entra ID + AC Databricks |
+| DataOps | GitHub Actions |
+| Visualización | Power BI |
+| Sharing | Delta Sharing |
 
-💻 GitHub: https://github.com/larosatoro96
+---
 
-📧 Correo: larosatoro979@gmail.com
+## 🙌 Autor
 
-Proyecto realizado como parte del curso de Ingeniería de Datos con DataBricks de Smart Data, integrando conceptos profesionales:
+👨‍💻 **Andrés Gustavo La Rosa Toro Cabrera**  
+📌 *Ingeniero de Datos*  
 
-✔ Arquitectura de datos 💾
-✔ Gobernanza y seguridad 🔐
-✔ Automación con CI/CD ⚙️
-✔ Procesos de ingesta y transformación 📦
-✔ Publicación de datos y BI 📊
+🔗 **LinkedIn:** https://www.linkedin.com/in/glarosatoroc/  
+💻 **GitHub:** https://github.com/larosatoro96  
+📧 **Correo:** larosatoro979@gmail.com
 
-⭐ Si te gustó el Proyecto...
+---
 
-Puedes apoyar con un Star ⭐ al repositorio ¡Muchas gracias!
+### ⭐ Si te gustó el Proyecto
+
+Puedes apoyar con un **Star** ⭐ al repositorio ¡Muchas gracias!
