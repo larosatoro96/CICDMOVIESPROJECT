@@ -1,0 +1,2 @@
+Databricks Fundamentals: https://api.accredible.com/v1/auth/invite?code=70550d9bb9e565c12d9a&credential_id=3d843a8f-f0e0-4163-8227-d96c1fb65158&url=https%3A%2F%2Fcredentials.databricks.com%2F3d843a8f-f0e0-4163-8227-d96c1fb65158&ident=2f5a6331-929e-4048-aed5-69319956a1b2/
+Generative AI Fundamentals: https://api.accredible.com/v1/auth/invite?code=d897feded7cbbb85f374&credential_id=82ec384c-448f-44fb-8af3-cbe51aacca1a&url=https%3A%2F%2Fcredentials.databricks.com%2F82ec384c-448f-44fb-8af3-cbe51aacca1a&ident=2f5a6331-929e-4048-aed5-69319956a1b2/
