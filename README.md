@@ -24,6 +24,8 @@ Construcción de un pipeline moderno que:
 
 ## 🏗️ Arquitectura y Servicios Usados
 
+![Arquitectura de la solución](https://github.com/larosatoro96/CICDMOVIESPROJECT/raw/construccion/ARQUITECTURA.png)
+
 - **Azure Databricks** (ETL + Notebooks)
 - **Azure Data Lake Storage Gen2**
 - **Azure Key Vault**
