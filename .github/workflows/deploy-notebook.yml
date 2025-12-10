@@ -361,7 +361,7 @@ jobs:
       run: |
         DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST }}
         DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}
-        WORKFLOW_NAME="WF_ADB"
+        WORKFLOW_NAME="ETL Final Job"
         
         echo "🔍 Validando la configuración del workflow creado..."
         
