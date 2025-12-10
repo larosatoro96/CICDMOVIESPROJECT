@@ -114,11 +114,11 @@ El repositorio contiene un workflow que:
 ![Dashboard](https://github.com/larosatoro96/CICDMOVIESPROJECT/raw/construccion/dashboard.png)
 
 Incluye:
-- Recomendador de películas
+- Top de directores con mejor recaudación
 - Distribución por género
 - Puntaje promedio (user_score)
-- Ranking por popularidad
-- Visualización de pósteres y backdrop
+- Ranking por presupuesto vs recaudación
+- Filtros personalizables
 
 📌 Fuente: **Tabla Golden mediante Delta Sharing**
 
