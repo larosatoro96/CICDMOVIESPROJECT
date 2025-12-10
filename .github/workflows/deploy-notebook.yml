@@ -21,7 +21,7 @@ jobs:
         ORIGIN_HOST=${{ secrets.DATABRICKS_ORIGIN_HOST }}
         ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}
         NOTEBOOK_BASE="/Workspace/Users/papia0938@gmail.com/ETL"
-        NOTEBOOKS=("0. Preparacion_Ambiente" "1. Drop-Medallion" "2. DDLs-Medallion" "3. 1. Ingest movies" "3. 2. Ingest details" "3. 3. Ingest more info" "3. 4. Ingest poster path" "4. Grants-Medallion" "5. DeltaSharing" "Load" "Revertion" "Transform")  # Agrega más según necesitesas
+        NOTEBOOKS=("Load" "Revertion" "Transform")  # Agrega más según necesitesas
 
         mkdir -p notebooks_to_deploy
 
