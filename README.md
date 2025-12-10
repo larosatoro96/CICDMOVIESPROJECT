@@ -111,6 +111,8 @@ El repositorio contiene un workflow que:
 
 ## 📊 Dashboard Power BI
 
+![Dashboard](https://github.com/larosatoro96/CICDMOVIESPROJECT/raw/construccion/dashboard.png)
+
 Incluye:
 - Recomendador de películas
 - Distribución por género
