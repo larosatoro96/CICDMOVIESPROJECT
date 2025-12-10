@@ -1,0 +1,126 @@
+resources:
+  jobs:
+    ETL_Final_Job:
+      name: ETL Final Job
+      tasks:
+        - task_key: Preparacion_Ambiente
+          notebook_task:
+            notebook_path: /Workspace/Users/papia0938@gmail.com/ETL/0. Preparacion_Ambiente
+            source: WORKSPACE
+          existing_cluster_id: 1209-001416-xm3tbqio
+        - task_key: Drop_Medallion
+          depends_on:
+            - task_key: Preparacion_Ambiente
+          notebook_task:
+            notebook_path: /Workspace/Users/papia0938@gmail.com/ETL/1. Drop-Medallion
+            base_parameters:
+              containerBronze: bronze
+              containerSilver: silver
+              containerGolden: golden
+            source: WORKSPACE
+          existing_cluster_id: 1209-001416-xm3tbqio
+        - task_key: DDL_Medallion
+          depends_on:
+            - task_key: Drop_Medallion
+          notebook_task:
+            notebook_path: /Workspace/Users/papia0938@gmail.com/ETL/2. DDLs-Medallion
+            base_parameters:
+              storageBronze: abfss://bronze@adlsfinalproject.dfs.core.windows.net
+              storageSilver: abfss://silver@adlsfinalproject.dfs.core.windows.net
+              storageGolden: abfss://golden@adlsfinalproject.dfs.core.windows.net
+            source: WORKSPACE
+          existing_cluster_id: 1209-001416-xm3tbqio
+        - task_key: Ingest_Details
+          depends_on:
+            - task_key: DDL_Medallion
+          notebook_task:
+            notebook_path: /Workspace/Users/papia0938@gmail.com/ETL/3. 2. Ingest details
+            base_parameters:
+              container: raw
+              esquema: bronze
+            source: WORKSPACE
+          existing_cluster_id: 1209-001416-xm3tbqio
+        - task_key: Ingest_More_Info
+          depends_on:
+            - task_key: DDL_Medallion
+          notebook_task:
+            notebook_path: /Workspace/Users/papia0938@gmail.com/ETL/3. 3. Ingest more info
+            base_parameters:
+              container: raw
+              esquema: bronze
+            source: WORKSPACE
+          existing_cluster_id: 1209-001416-xm3tbqio
+        - task_key: Ingest_Movies
+          depends_on:
+            - task_key: DDL_Medallion
+          notebook_task:
+            notebook_path: /Workspace/Users/papia0938@gmail.com/ETL/3. 1. Ingest movies
+            base_parameters:
+              container: raw
+              esquema: bronze
+            source: WORKSPACE
+          existing_cluster_id: 1209-001416-xm3tbqio
+        - task_key: Ingest_Poster
+          depends_on:
+            - task_key: DDL_Medallion
+          notebook_task:
+            notebook_path: /Workspace/Users/papia0938@gmail.com/ETL/3. 4. Ingest poster path
+            base_parameters:
+              container: raw
+              esquema: bronze
+            source: WORKSPACE
+          existing_cluster_id: 1209-001416-xm3tbqio
+        - task_key: Grants_Medallion
+          depends_on:
+            - task_key: Ingest_Poster
+            - task_key: Ingest_Movies
+            - task_key: Ingest_Details
+            - task_key: Ingest_More_Info
+          notebook_task:
+            notebook_path: /Workspace/Users/papia0938@gmail.com/ETL/4. Grants-Medallion
+            source: WORKSPACE
+          existing_cluster_id: 1209-001416-xm3tbqio
+        - task_key: Transform
+          depends_on:
+            - task_key: Grants_Medallion
+          notebook_task:
+            notebook_path: /Workspace/Users/papia0938@gmail.com/ETL/Transform
+            base_parameters:
+              esquema_source: bronze
+              esquema_sink: silver
+            source: WORKSPACE
+          existing_cluster_id: 1209-001416-xm3tbqio
+        - task_key: Load
+          depends_on:
+            - task_key: Transform
+          notebook_task:
+            notebook_path: /Workspace/Users/papia0938@gmail.com/ETL/Load
+            base_parameters:
+              esquema_source: silver
+              esquema_sink: golden
+            source: WORKSPACE
+          existing_cluster_id: 1209-001416-xm3tbqio
+        - task_key: Revert
+          depends_on:
+            - task_key: Ingest_Poster
+            - task_key: Load
+            - task_key: Ingest_Movies
+            - task_key: Preparacion_Ambiente
+            - task_key: Transform
+            - task_key: Ingest_More_Info
+            - task_key: Grants_Medallion
+            - task_key: DDL_Medallion
+            - task_key: Drop_Medallion
+            - task_key: Ingest_Details
+          run_if: AT_LEAST_ONE_FAILED
+          notebook_task:
+            notebook_path: /Workspace/Users/papia0938@gmail.com/ETL/Revertion
+            source: WORKSPACE
+          existing_cluster_id: 1209-001416-xm3tbqio
+      queue:
+        enabled: true
+      parameters:
+        - name: catalogo
+          default: catalog_dev
+        - name: storageName
+          default: adlsfinalproject
